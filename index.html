@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>SAUFKOMPASS - Das #1 Trinkspiel Deutschlands</title>
+<meta name="description" content="SAUFKOMPASS - 1500+ Karten, 17 Kategorien, 7 Minigames. Kostenlos spielen!">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0f;--card:#12121a;--elev:#1a1a25;--border:#2a2a3a;--text:#fff;--text2:#8a8a9a;--orange:#ff6b35;--pink:#ff2d95;--cyan:#00f5ff;--yellow:#ffd700;--green:#00ff88;--grad:linear-gradient(135deg,#ff6b35,#ff2d95)}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+section{padding:80px 0;position:relative}
+h1,h2,h3{font-family:'Dela Gothic One',cursive;font-weight:400}
+h1{font-size:clamp(2.2rem,7vw,4rem);line-height:1.1}
+h2{font-size:clamp(1.5rem,5vw,2.5rem);margin-bottom:1rem}
+
+.bg-glow{position:fixed;top:0;left:0;right:0;bottom:0;z-index:-1;overflow:hidden;pointer-events:none}
+.bg-glow::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 20% 80%,rgba(255,107,53,0.12) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(255,45,149,0.12) 0%,transparent 50%);animation:bgMove 25s ease-in-out infinite}
+@keyframes bgMove{0%,100%{transform:translate(0,0)}50%{transform:translate(-3%,3%)}}
+
+.logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none}
+.logo-icon{width:42px;height:42px;background:var(--grad);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;box-shadow:0 0 25px rgba(255,107,53,0.4);position:relative}
+.logo-icon::after{content:'';position:absolute;top:3px;right:3px;width:9px;height:9px;background:var(--cyan);border-radius:50%;border:2px solid var(--bg)}
+.logo-text{font-family:'Dela Gothic One',cursive;font-size:1.25rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 32px;border-radius:14px;font-size:1rem;font-weight:700;text-decoration:none;cursor:pointer;border:none;transition:all .3s}
+.btn-primary{background:var(--grad);color:#fff;box-shadow:0 4px 25px rgba(255,107,53,0.4)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 35px rgba(255,107,53,0.5)}
+.btn-secondary{background:var(--elev);color:var(--text);border:2px solid var(--border)}
+.btn-secondary:hover{border-color:var(--cyan);box-shadow:0 0 25px rgba(0,245,255,0.3)}
+
+.glow-text{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+nav{position:fixed;top:0;left:0;right:0;padding:16px 0;z-index:1000;transition:all .3s}
+nav.scrolled{background:rgba(10,10,15,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+nav .container{display:flex;justify-content:space-between;align-items:center}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{color:var(--text2);text-decoration:none;font-weight:500;font-size:0.9rem;transition:color .2s}
+.nav-links a:hover{color:var(--cyan)}
+.nav-cta{padding:10px 20px!important;font-size:0.85rem!important}
+.live-counter{display:flex;align-items:center;gap:8px;background:rgba(0,255,136,0.1);border:1px solid rgba(0,255,136,0.3);padding:8px 14px;border-radius:100px;font-size:0.8rem;color:var(--green);font-weight:600}
+.live-dot{width:8px;height:8px;background:var(--green);border-radius:50%;animation:livePulse 1.5s ease-in-out infinite}
+@keyframes livePulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,255,136,0.7)}50%{opacity:0.7;box-shadow:0 0 0 6px rgba(0,255,136,0)}}
+@media(max-width:768px){.nav-links{display:none}.live-counter{font-size:0.7rem;padding:6px 10px}}
+
+.hero{min-height:100vh;min-height:100dvh;display:flex;align-items:center;padding:100px 0 60px}
+.hero-content{text-align:center;max-width:700px;margin:0 auto}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,215,0,0.12);border:1px solid var(--yellow);padding:10px 20px;border-radius:100px;font-size:0.85rem;color:var(--yellow);margin-bottom:24px;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,215,0,0.4)}50%{box-shadow:0 0 0 12px rgba(255,215,0,0)}}
+.hero h1{margin-bottom:20px}
+.hero-desc{font-size:1.1rem;color:var(--text2);margin-bottom:32px}
+.hero-buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
+.no-install-badge{display:flex;align-items:center;gap:12px;background:rgba(0,245,255,0.08);border:1px solid rgba(0,245,255,0.3);padding:14px 20px;border-radius:14px;text-decoration:none;color:var(--text);margin-bottom:40px;transition:all .3s;max-width:500px;margin-left:auto;margin-right:auto}
+.no-install-badge:hover{background:rgba(0,245,255,0.15);border-color:var(--cyan);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,245,255,0.2)}
+.nib-icon{font-size:1.5rem;flex-shrink:0}
+.nib-text{font-size:0.85rem;text-align:left;line-height:1.4;flex:1}
+.nib-text strong{color:var(--cyan);display:block;margin-bottom:2px}
+.nib-arrow{color:var(--cyan);font-size:1.2rem;transition:transform .3s}
+.no-install-badge:hover .nib-arrow{transform:translateX(4px)}
+.hero-stats{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+.stat{text-align:center;padding:20px;background:var(--card);border:1px solid var(--border);border-radius:16px;min-width:100px;transition:all .3s}
+.stat:hover{transform:translateY(-5px);border-color:var(--cyan)}
+.stat-num{font-family:'Dela Gothic One',cursive;font-size:1.8rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat-label{font-size:0.75rem;color:var(--text2);margin-top:4px}
+.trust-badges{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:24px}
+.trust-badge{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.05);border:1px solid var(--border);padding:8px 14px;border-radius:100px;font-size:0.75rem;color:var(--text2);transition:all .3s}
+.trust-badge:hover{border-color:var(--green);color:var(--text);background:rgba(0,255,136,0.1)}
+.trust-badge span{font-size:0.9rem}
+
+.hero-phone{margin-top:50px;display:flex;justify-content:center}
+.phone-wrap{position:relative;animation:phoneFloat 5s ease-in-out infinite}
+@keyframes phoneFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.phone{width:220px;height:450px;background:linear-gradient(145deg,#1a1a25,#0a0a0f);border-radius:32px;padding:10px;box-shadow:0 30px 60px rgba(0,0,0,0.5),0 0 0 1px rgba(255,255,255,0.1),0 0 40px rgba(255,45,149,0.3)}
+.phone-screen{width:100%;height:100%;background:var(--bg);border-radius:24px;overflow:hidden;position:relative;display:flex;flex-direction:column}
+.phone-notch{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:70px;height:22px;background:#000;border-radius:12px;z-index:10}
+.demo-header{display:flex;justify-content:space-between;align-items:center;padding:42px 16px 12px}
+.dh-cat{font-size:0.8rem;font-weight:700;color:var(--cyan);transition:color .3s}
+.dh-count{font-size:0.7rem;color:var(--text2);background:var(--card);padding:4px 10px;border-radius:20px}
+.demo-cards-container{flex:1;padding:0 12px;position:relative;overflow:hidden}
+.demo-card-stack{position:relative;height:100%}
+.demo-single-card{position:absolute;top:0;left:0;right:0;bottom:12px;background:linear-gradient(160deg,var(--card) 0%,#0d0d14 100%);border:1px solid var(--border);border-radius:20px;display:flex;flex-direction:column;transform-origin:center bottom}
+.demo-single-card.swipe-out{animation:swipeOut .5s ease-in-out forwards}
+.demo-single-card.swipe-in{animation:swipeIn .4s ease-out forwards}
+@keyframes swipeOut{
+0%{transform:translateX(0) rotate(0);opacity:1}
+100%{transform:translateX(-130%) rotate(-15deg);opacity:0}
+}
+@keyframes swipeIn{
+0%{transform:translateX(100%) rotate(10deg);opacity:0}
+100%{transform:translateX(0) rotate(0);opacity:1}
+}
+.dsc-q{flex:1;display:flex;align-items:center;justify-content:center;padding:20px;text-align:center;font-size:0.95rem;font-weight:600;line-height:1.5;margin:0}
+.dsc-p{padding:14px 16px;background:rgba(255,107,53,0.1);border-top:1px solid var(--border);text-align:center;font-size:0.75rem;color:var(--orange);border-radius:0 0 20px 20px}
+.demo-actions{display:flex;justify-content:center;gap:14px;padding:8px 16px}
+.da-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:var(--card);display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.da-btn.main{width:50px;height:50px;font-size:1.3rem;border-color:var(--orange);background:rgba(255,107,53,0.15)}
+.demo-hint{text-align:center;padding:6px;font-size:0.65rem;color:var(--text2)}
+.demo-hint span{display:inline-block;animation:hintBounce 1s ease-in-out infinite}
+@keyframes hintBounce{0%,100%{transform:translateX(0)}50%{transform:translateX(-4px)}}
+.float-emo{position:absolute;font-size:1.8rem;filter:drop-shadow(0 0 8px rgba(255,255,255,0.3));animation:emoFloat 3s ease-in-out infinite}
+.float-emo:nth-child(1){top:-15px;left:-25px}
+.float-emo:nth-child(2){top:30%;right:-35px;animation-delay:-1s}
+.float-emo:nth-child(3){bottom:25%;left:-30px;animation-delay:-2s}
+.float-emo:nth-child(4){bottom:-10px;right:-20px;animation-delay:-0.5s}
+@keyframes emoFloat{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-10px) rotate(5deg)}}
+
+@media(min-width:768px){.hero{padding:120px 0 80px}.stat-num{font-size:2rem}.phone{width:260px;height:520px}}
+
+.features{background:linear-gradient(180deg,var(--bg) 0%,var(--card) 100%)}
+.section-header{text-align:center;margin-bottom:50px}
+.section-header p{color:var(--text2);font-size:1rem;max-width:500px;margin:0 auto}
+.features-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(min-width:800px){.features-grid{grid-template-columns:repeat(3,1fr)}}
+.feature-card{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:24px 20px;transition:all .3s;position:relative;overflow:hidden}
+.feature-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad);transform:scaleX(0);transition:transform .3s}
+.feature-card:hover{transform:translateY(-6px);border-color:var(--orange)}
+.feature-card:hover::before{transform:scaleX(1)}
+.feature-icon{font-size:2.5rem;margin-bottom:16px;display:block}
+.feature-card h3{font-size:1rem;margin-bottom:8px}
+.feature-card p{color:var(--text2);font-size:0.85rem}
+.feature-tag{display:inline-block;background:rgba(0,245,255,0.12);color:var(--cyan);padding:4px 10px;border-radius:100px;font-size:0.7rem;font-weight:600;margin-top:12px}
+
+.comparison{background:var(--bg)}
+.compare-header{text-align:center;margin-bottom:40px}
+.compare-badge{display:inline-block;background:rgba(255,68,68,0.15);color:#ff6b6b;padding:8px 20px;border-radius:100px;font-size:0.85rem;font-weight:600;margin-bottom:12px}
+.battle{display:grid;grid-template-columns:1fr;gap:20px;max-width:900px;margin:0 auto 30px}
+@media(min-width:800px){.battle{grid-template-columns:1fr auto 1fr}}
+.loser-card{background:var(--card);border:2px solid var(--border);border-radius:24px;padding:28px 24px;opacity:0.75;position:relative}
+.loser-card::before{content:'👎';position:absolute;top:-12px;right:20px;font-size:1.3rem}
+.card-label{font-size:0.75rem;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.card-price{font-family:'Dela Gothic One',cursive;font-size:2.2rem;color:var(--text2);text-decoration:line-through;text-decoration-color:#ff4444}
+.card-period{font-size:0.85rem;color:var(--text2);margin-bottom:16px}
+.card-list{list-style:none}
+.card-list li{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:0.85rem;color:var(--text2)}
+.card-list li:last-child{border:none}
+.vs-circle{display:flex;align-items:center;justify-content:center}
+.vs{width:60px;height:60px;background:var(--grad);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Dela Gothic One',cursive;font-size:1.3rem;box-shadow:0 0 30px rgba(255,107,53,0.5);animation:vsPulse 1.5s ease-in-out infinite}
+@keyframes vsPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.winner-card{background:linear-gradient(145deg,rgba(255,107,53,0.1),rgba(255,45,149,0.1));border:2px solid var(--orange);border-radius:24px;padding:28px 24px;position:relative;box-shadow:0 15px 50px rgba(255,107,53,0.2)}
+.winner-card::before{content:'👑';position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:2rem;animation:crownBob 2s ease-in-out infinite}
+@keyframes crownBob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-6px)}}
+.winner-badge{position:absolute;top:10px;right:10px;background:var(--yellow);color:var(--bg);padding:4px 10px;border-radius:100px;font-size:0.65rem;font-weight:700}
+.winner-label{font-size:0.75rem;color:var(--cyan);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;margin-top:8px}
+.winner-price{font-family:'Dela Gothic One',cursive;font-size:2.5rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.winner-list li{color:var(--text);border-color:rgba(255,255,255,0.1)}
+.savings{background:linear-gradient(90deg,var(--green),#00cc6a);color:var(--bg);text-align:center;padding:14px 24px;border-radius:14px;font-weight:700;font-size:0.95rem;max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:10px}
+.savings span{font-size:1.4rem}
+@media(max-width:799px){.vs-circle{order:-1}}
+
+.testimonials{background:var(--card);overflow:hidden}
+.testimonial-slider{position:relative;margin:0 -20px;padding:0 20px;overflow:hidden}
+.testimonial-track{display:flex;gap:20px;animation:testimonialScroll 30s linear infinite;width:max-content}
+.testimonial-track:hover{animation-play-state:paused}
+@keyframes testimonialScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.testimonial-card{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:24px;min-width:300px;max-width:340px;flex-shrink:0;transition:all .3s}
+.testimonial-card:hover{border-color:var(--yellow);transform:translateY(-4px)}
+.tc-stars{color:var(--yellow);font-size:1rem;margin-bottom:12px;letter-spacing:2px}
+.tc-text{font-size:0.95rem;line-height:1.6;margin-bottom:16px;color:var(--text)}
+.tc-author{display:flex;align-items:center;gap:12px}
+.tc-avatar{width:40px;height:40px;background:var(--grad);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem}
+.tc-author strong{display:block;font-size:0.9rem}
+.tc-author span{font-size:0.75rem;color:var(--text2)}
+.testimonial-dots{display:flex;justify-content:center;gap:8px;margin-top:24px}
+.testimonial-stats{display:flex;justify-content:center;gap:40px;margin-top:40px;flex-wrap:wrap}
+.ts-item{text-align:center}
+.ts-num{display:block;font-family:'Dela Gothic One',cursive;font-size:2rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.ts-label{font-size:0.8rem;color:var(--text2)}
+
+.pricing{background:var(--card)}
+.story-box{background:linear-gradient(135deg,rgba(255,107,53,0.08),rgba(255,45,149,0.08));border:1px solid rgba(255,107,53,0.3);border-radius:24px;padding:32px 28px;max-width:700px;margin:0 auto 50px;position:relative;overflow:hidden}
+.story-box::before{content:'';position:absolute;top:-50%;right:-50%;width:200px;height:200px;background:radial-gradient(circle,rgba(255,107,53,0.15) 0%,transparent 70%);pointer-events:none}
+.story-content{position:relative;z-index:1}
+.story-emoji{font-size:2.5rem;margin-bottom:16px}
+.story-box h3{font-size:1.3rem;margin-bottom:16px}
+.story-box p{color:var(--text2);font-size:0.95rem;line-height:1.7;margin-bottom:12px}
+.story-box p strong{color:var(--text)}
+.story-box .highlight{color:var(--yellow);font-weight:600}
+.story-signature{display:flex;align-items:center;gap:14px;margin-top:24px;padding-top:20px;border-top:1px solid var(--border)}
+.story-signature span:first-child{font-size:2rem}
+.story-signature strong{display:block;font-size:0.95rem}
+.story-signature div span{font-size:0.8rem;color:var(--text2)}
+.pricing-grid{display:grid;grid-template-columns:1fr;gap:20px;max-width:950px;margin:50px auto 0}
+@media(min-width:700px){.pricing-grid{grid-template-columns:repeat(3,1fr)}}
+.price-card{background:var(--bg);border:2px solid var(--border);border-radius:24px;padding:28px 20px;text-align:center;position:relative;transition:all .3s}
+.price-card:hover{transform:translateY(-6px)}
+.price-card.pop{border-color:var(--yellow);box-shadow:0 15px 50px rgba(255,215,0,0.15);transform:scale(1.02)}
+.price-card.pop:hover{transform:scale(1.02) translateY(-6px)}
+.price-card.pop::before{content:'🔥 BELIEBT';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--yellow);color:var(--bg);padding:5px 14px;border-radius:100px;font-size:0.7rem;font-weight:700}
+.price-name{font-size:1.2rem;margin-bottom:6px}
+.price-amt{font-family:'Dela Gothic One',cursive;font-size:2.8rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.price-sub{color:var(--text2);font-size:0.8rem;margin-bottom:20px}
+.price-list{text-align:left;margin-bottom:20px;list-style:none}
+.price-list li{padding:9px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;font-size:0.85rem}
+.price-list li:last-child{border:none}
+.price-note{font-size:0.7rem;color:var(--text2);font-style:italic;margin-bottom:16px;text-align:center}
+.yes{color:var(--green)}
+.no{color:#ff4444;opacity:0.6}
+
+.faq{background:var(--bg)}
+.faq-list{max-width:700px;margin:50px auto 0}
+.faq-item{background:var(--card);border:1px solid var(--border);border-radius:14px;margin-bottom:12px;overflow:hidden}
+.faq-q{padding:18px 20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:0.95rem}
+.faq-q:hover{color:var(--cyan)}
+.faq-icon{width:26px;height:26px;background:var(--elev);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--cyan);transition:all .3s}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--cyan);color:var(--bg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s}
+.faq-item.open .faq-a{max-height:800px}
+.faq-inner{padding:0 20px 20px;color:var(--text2);font-size:0.9rem;line-height:1.7}
+.install-box{background:var(--elev);border-radius:12px;padding:16px;margin-top:14px}
+.install-box h4{font-size:0.85rem;color:var(--cyan);margin-bottom:12px}
+.tabs{display:flex;gap:8px;margin-bottom:12px}
+.tab{padding:7px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px;font-size:0.75rem;cursor:pointer}
+.tab.on{background:var(--cyan);color:var(--bg);border-color:var(--cyan)}
+.tab-content{display:none}
+.tab-content.on{display:block}
+.step{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;font-size:0.8rem}
+.step-n{width:24px;height:24px;background:var(--grad);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;flex-shrink:0}
+
+.cta{background:linear-gradient(180deg,var(--card),var(--bg));text-align:center;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(255,107,53,0.12) 0%,transparent 70%);pointer-events:none}
+.cta-inner{position:relative;z-index:1}
+
+.install-section{background:linear-gradient(180deg,var(--bg) 0%,var(--card) 100%)}
+.install-card{background:var(--card);border:2px solid var(--border);border-radius:28px;padding:40px 24px;max-width:800px;margin:0 auto}
+.install-header{text-align:center;margin-bottom:32px}
+.install-emoji{font-size:3rem;display:block;margin-bottom:16px;animation:bounce 2s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.install-header h2{margin-bottom:12px;font-size:1.6rem}
+.install-header p{color:var(--text2);font-size:0.95rem;max-width:500px;margin:0 auto}
+.install-platforms{display:grid;grid-template-columns:1fr;gap:20px;margin-bottom:28px}
+@media(min-width:600px){.install-platforms{grid-template-columns:1fr 1fr}}
+.platform-card{background:var(--bg);border:1px solid var(--border);border-radius:18px;padding:24px 20px;transition:all .3s}
+.platform-card:hover{border-color:var(--cyan);transform:translateY(-4px)}
+.platform-icon{font-size:2.5rem;margin-bottom:12px}
+.platform-card h3{font-size:1.1rem;margin-bottom:16px}
+.platform-steps{display:flex;flex-direction:column;gap:12px}
+.pstep{display:flex;align-items:center;gap:12px;font-size:0.9rem}
+.pnum{width:28px;height:28px;background:var(--grad);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;flex-shrink:0}
+.pstep .key{background:var(--elev);padding:2px 6px;border-radius:6px;font-size:0.8rem}
+.install-benefits{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.ibenefit{display:flex;align-items:center;gap:8px;background:rgba(0,255,136,0.1);border:1px solid rgba(0,255,136,0.3);padding:10px 16px;border-radius:100px;font-size:0.85rem;font-weight:600;color:var(--green)}
+.ibenefit span{font-size:1.1rem}
+.cta h2{margin-bottom:14px}
+.cta p{color:var(--text2);font-size:1rem;max-width:500px;margin:0 auto 28px}
+
+footer{background:var(--bg);padding:50px 0 24px;border-top:1px solid var(--border)}
+.foot-grid{display:grid;grid-template-columns:1fr;gap:28px;margin-bottom:28px}
+@media(min-width:600px){.foot-grid{grid-template-columns:2fr 1fr 1fr 1fr}}
+.foot-brand p{color:var(--text2);font-size:0.85rem;max-width:260px;margin-top:14px}
+.foot-social{display:flex;gap:10px;margin-top:14px}
+.foot-social a{width:40px;height:40px;background:var(--elev);border:1px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;text-decoration:none;transition:all .2s}
+.foot-social a:hover{background:var(--cyan);border-color:var(--cyan)}
+.foot-col h4{font-family:'Dela Gothic One',cursive;font-size:0.85rem;margin-bottom:14px;color:var(--pink)}
+.foot-col a{display:block;color:var(--text2);text-decoration:none;padding:5px 0;font-size:0.8rem}
+.foot-col a:hover{color:var(--text)}
+.foot-bottom{text-align:center;padding-top:20px;border-top:1px solid var(--border);color:var(--text2);font-size:0.75rem}
+
+.age-box{position:fixed;bottom:14px;left:14px;right:14px;background:rgba(18,18,26,0.95);backdrop-filter:blur(10px);border:1px solid #ff4444;border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:12px;z-index:100;max-width:400px}
+.age-box span{font-size:1.4rem}
+.age-box p{font-size:0.75rem;color:var(--text2);flex:1}
+.age-box strong{color:#ff6b6b}
+.age-x{background:none;border:none;color:var(--text2);font-size:1.2rem;cursor:pointer}
+
+.reveal{opacity:0;transform:translateY(30px);transition:all .6s ease-out}
+.reveal.show{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+<div class="bg-glow"></div>
+
+<nav id="nav">
+<div class="container">
+<a href="#" class="logo"><div class="logo-icon">🧭</div><span class="logo-text">SAUFKOMPASS</span></a>
+<div class="live-counter"><span class="live-dot"></span><span id="liveCount">847</span> spielen gerade</div>
+<div class="nav-links">
+<a href="#features">Features</a>
+<a href="#compare">Vergleich</a>
+<a href="#pricing">Preise</a>
+<a href="#faq">FAQ</a>
+<a href="app.html" class="btn btn-primary nav-cta">🎮 Spielen</a>
+</div>
+</div>
+</nav>
+
+<section class="hero">
+<div class="container">
+<div class="hero-content">
+<div class="hero-badge reveal">🏆 #1 Trinkspiel App Deutschlands</div>
+<h1 class="reveal">Die Party wird <span class="glow-text">legendär</span></h1>
+<p class="hero-desc reveal">1500+ Karten, 17 Kategorien, 7 Minigames. Wahrheit oder Pflicht, Kings Cup, Ich hab noch nie & mehr – kostenlos!</p>
+<div class="hero-buttons reveal">
+<a href="app.html" class="btn btn-primary">🎮 Kostenlos spielen</a>
+<a href="#compare" class="btn btn-secondary">Warum wir?</a>
+</div>
+<a href="#install" class="no-install-badge reveal">
+<span class="nib-icon">📲</span>
+<span class="nib-text"><strong>Keine Installation nötig!</strong> Direkt im Browser spielen oder auf Homescreen speichern</span>
+<span class="nib-arrow">→</span>
+</a>
+<div class="hero-stats reveal">
+<div class="stat"><div class="stat-num">1500+</div><div class="stat-label">Karten</div></div>
+<div class="stat"><div class="stat-num">50k+</div><div class="stat-label">Spieler</div></div>
+<div class="stat"><div class="stat-num">4.9★</div><div class="stat-label">Bewertung</div></div>
+</div>
+<div class="trust-badges reveal">
+<div class="trust-badge"><span>🇩🇪</span> Made in Germany</div>
+<div class="trust-badge"><span>🔒</span> DSGVO konform</div>
+<div class="trust-badge"><span>💳</span> Sichere Zahlung</div>
+<div class="trust-badge"><span>✅</span> Geprüft & Sicher</div>
+</div>
+</div>
+<div class="hero-phone reveal">
+<div class="phone-wrap">
+<div class="float-emo">🍺</div>
+<div class="float-emo">🎉</div>
+<div class="float-emo">🔥</div>
+<div class="float-emo">😂</div>
+<div class="phone">
+<div class="phone-screen">
+<div class="phone-notch"></div>
+<div class="demo-header">
+<span class="dh-cat" id="catDisplay">🎯 WAHRHEIT</span>
+<span class="dh-count"><span id="countDisplay">1</span>/10</span>
+</div>
+<div class="demo-cards-container">
+<div class="demo-card-stack">
+<div class="demo-single-card" id="card1">
+<p class="dsc-q" id="q1">Was war der peinlichste Moment deines Lebens?</p>
+<div class="dsc-p">🍺 Sonst: 2 Schlücke</div>
+</div>
+</div>
+</div>
+<div class="demo-actions">
+<div class="da-btn">⏭️</div>
+<div class="da-btn main">🍺</div>
+<div class="da-btn">✅</div>
+</div>
+<div class="demo-hint"><span>←</span> Swipe für nächste Karte</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="features" id="features">
+<div class="container">
+<div class="section-header reveal"><h2>Warum <span class="glow-text">SAUFKOMPASS</span>?</h2><p>Die ultimative Trinkspiel-App für unvergessliche Partys</p></div>
+<div class="features-grid">
+<div class="feature-card reveal"><span class="feature-icon">🎴</span><h3>1500+ Karten</h3><p>Riesige Auswahl – nie dieselbe Karte zweimal!</p><span class="feature-tag">Immer frisch</span></div>
+<div class="feature-card reveal"><span class="feature-icon">🎲</span><h3>17 Kategorien</h3><p>Von Wahrheit bis 18+ Spicy</p><span class="feature-tag">Anpassbar</span></div>
+<div class="feature-card reveal"><span class="feature-icon">🕹️</span><h3>7 Minigames</h3><p>Würfel-Duell, Emoji-Raten & mehr</p><span class="feature-tag">Interaktiv</span></div>
+<div class="feature-card reveal"><span class="feature-icon">👑</span><h3>10 Spielmodi</h3><p>Kings Cup, Ich hab noch nie & mehr</p><span class="feature-tag">Klassiker</span></div>
+<div class="feature-card reveal"><span class="feature-icon">📱</span><h3>Offline spielbar</h3><p>Funktioniert ohne Internet</p><span class="feature-tag">Überall dabei</span></div>
+<div class="feature-card reveal"><span class="feature-icon">👥</span><h3>2-20 Spieler</h3><p>Pärchenabend bis WG-Party</p><span class="feature-tag">Flexibel</span></div>
+</div>
+</div>
+</section>
+
+<section class="comparison" id="compare">
+<div class="container">
+<div class="compare-header reveal">
+<div class="compare-badge">⚡ Schluss mit überteuerten Apps!</div>
+<h2>Der ehrliche Vergleich</h2>
+</div>
+<div class="battle">
+<div class="loser-card reveal">
+<div class="card-label">Andere Trinkspiel-Apps</div>
+<div class="card-price">5-10€</div>
+<div class="card-period">pro Monat</div>
+<ul class="card-list">
+<li>😐 Nur 100-300 Karten</li>
+<li>😐 2-3 Spielmodi</li>
+<li>❌ Keine Minigames</li>
+<li>❌ Max. 6 Spieler</li>
+<li>❌ Nervige Werbung</li>
+<li>❌ Oft auf Englisch</li>
+</ul>
+</div>
+<div class="vs-circle reveal"><div class="vs">VS</div></div>
+<div class="winner-card reveal">
+<div class="winner-badge">WINNER</div>
+<div class="winner-label">SAUFKOMPASS PRO</div>
+<div class="winner-price">4,99€</div>
+<div class="card-period">pro Monat</div>
+<ul class="card-list winner-list">
+<li>🔥 <strong>1500+ Karten</strong></li>
+<li>🎮 <strong>10 Spielmodi</strong></li>
+<li>🕹️ <strong>7 Minigames</strong></li>
+<li>👥 <strong>Bis zu 20 Spieler</strong></li>
+<li>🚫 <strong>Keine Werbung!</strong></li>
+<li>🇩🇪 <strong>100% Deutsch</strong></li>
+</ul>
+</div>
+</div>
+<div class="savings reveal"><span>💰</span> Du sparst bis zu 60% gegenüber anderen Apps!</div>
+</div>
+</section>
+
+<section class="testimonials" id="reviews">
+<div class="container">
+<div class="section-header reveal">
+<h2>Das sagen unsere <span class="glow-text">Spieler</span></h2>
+<p>Über 50.000 zufriedene Party-Gänger</p>
+</div>
+<div class="testimonial-slider reveal">
+<div class="testimonial-track" id="testimonialTrack">
+<div class="testimonial-card">
+<div class="tc-stars">⭐⭐⭐⭐⭐</div>
+<p class="tc-text">"Beste Trinkspiel-App die ich je hatte! Haben auf dem JGA 6 Stunden durchgespielt 😂🍻"</p>
+<div class="tc-author"><div class="tc-avatar">L</div><div><strong>Lena M.</strong><span>JGA Köln</span></div></div>
+</div>
+<div class="testimonial-card">
+<div class="tc-stars">⭐⭐⭐⭐⭐</div>
+<p class="tc-text">"Endlich eine App die RICHTIG auf Deutsch ist! Die Aufgaben sind brutal lustig 🔥"</p>
+<div class="tc-author"><div class="tc-avatar">M</div><div><strong>Markus T.</strong><span>WG-Party München</span></div></div>
+</div>
+<div class="testimonial-card">
+<div class="tc-stars">⭐⭐⭐⭐⭐</div>
+<p class="tc-text">"Die Spicy-Karten sind WILD! Perfekt für den Pärchenabend. 10/10 würde wieder trinken 😏"</p>
+<div class="tc-author"><div class="tc-avatar">S</div><div><strong>Sarah & Tim</strong><span>Pärchenabend</span></div></div>
+</div>
+<div class="testimonial-card">
+<div class="tc-stars">⭐⭐⭐⭐⭐</div>
+<p class="tc-text">"Wir nutzen nur noch SAUFKOMPASS! Die Minigames machen es so viel besser als andere Apps"</p>
+<div class="tc-author"><div class="tc-avatar">J</div><div><strong>Jonas K.</strong><span>Festival-Crew</span></div></div>
+</div>
+<div class="testimonial-card">
+<div class="tc-stars">⭐⭐⭐⭐⭐</div>
+<p class="tc-text">"Dass es offline funktioniert ist GOLD wert! Auf dem Festival der absolute Lebensretter 🎪"</p>
+<div class="tc-author"><div class="tc-avatar">A</div><div><strong>Anna B.</strong><span>Parookaville</span></div></div>
+</div>
+<div class="testimonial-card">
+<div class="tc-stars">⭐⭐⭐⭐⭐</div>
+<p class="tc-text">"PRO lohnt sich mega! 1500 Karten und keine Werbung mehr. Beste 5€ ever invested 💪"</p>
+<div class="tc-author"><div class="tc-avatar">F</div><div><strong>Felix R.</strong><span>Stammtisch Hamburg</span></div></div>
+</div>
+</div>
+</div>
+<div class="testimonial-dots" id="testimonialDots"></div>
+<div class="testimonial-stats reveal">
+<div class="ts-item"><span class="ts-num">50.000+</span><span class="ts-label">Downloads</span></div>
+<div class="ts-item"><span class="ts-num">4.9/5</span><span class="ts-label">Bewertung</span></div>
+<div class="ts-item"><span class="ts-num">98%</span><span class="ts-label">Empfehlen uns</span></div>
+</div>
+</div>
+</section>
+
+<section class="pricing" id="pricing">
+<div class="container">
+<div class="section-header reveal"><h2>Wähle deinen Plan</h2><p>Starte kostenlos oder hol dir alle Features</p></div>
+
+<div class="story-box reveal">
+<div class="story-content">
+<div class="story-emoji">🎯</div>
+<h3>Warum wir SAUFKOMPASS gebaut haben</h3>
+<p>Wir waren es leid: Überteuerte Apps mit 50 langweiligen Karten. Englische Übersetzungen die keinen Sinn ergeben. Werbung alle 3 Sekunden.</p>
+<p><strong>Also haben wir selbst eine gebaut.</strong></p>
+<p>SAUFKOMPASS ist von Party-Leuten für Party-Leute. Jede Karte wurde getestet – auf echten Partys, mit echtem Alkohol, mit echten Freunden. Das Ergebnis? <span class="highlight">1500+ Karten die WIRKLICH für Stimmung sorgen.</span></p>
+<div class="story-signature">
+<span>🍻</span>
+<div><strong>Das SAUFKOMPASS Team</strong><span>Zeven, Deutschland</span></div>
+</div>
+</div>
+</div>
+
+<div class="pricing-grid">
+<div class="price-card reveal">
+<div class="price-name">Free</div>
+<div class="price-amt">0€</div>
+<div class="price-sub">Für immer kostenlos</div>
+<ul class="price-list">
+<li><span class="yes">✓</span> 200+ Basis-Karten</li>
+<li><span class="yes">✓</span> 7 Kategorien</li>
+<li><span class="yes">✓</span> Kings Cup & Ich hab noch nie</li>
+<li><span class="yes">✓</span> Bis zu 6 Spieler</li>
+<li><span class="no">✗</span> Enthält Werbung</li>
+<li><span class="no">✗</span> PRO Karten-Packs</li>
+</ul>
+<a href="app.html" class="btn btn-secondary" style="width:100%">Kostenlos starten</a>
+</div>
+<div class="price-card pop reveal">
+<div class="price-name">👑 PRO Monat</div>
+<div class="price-amt">4,99€</div>
+<div class="price-sub">Pro Monat • Jederzeit kündbar</div>
+<ul class="price-list">
+<li><span class="yes">✓</span> <strong>1500+ Karten</strong></li>
+<li><span class="yes">✓</span> <strong>17 Kategorien</strong></li>
+<li><span class="yes">✓</span> <strong>Alle 10 Spielmodi</strong></li>
+<li><span class="yes">✓</span> <strong>Bis zu 20 Spieler</strong></li>
+<li><span class="yes">✓</span> <strong>Keine Werbung!</strong></li>
+<li><span class="yes">✓</span> 🔥 Spicy 18+ Karten*</li>
+</ul>
+<p class="price-note">*Altersverifikation erforderlich</p>
+<a href="app.html" class="btn btn-primary" style="width:100%">PRO werden</a>
+</div>
+<div class="price-card reveal">
+<div class="price-name">👑 PRO Jahr</div>
+<div class="price-amt">47,99€</div>
+<div class="price-sub">Pro Jahr • 20% sparen!</div>
+<ul class="price-list">
+<li><span class="yes">✓</span> <strong>Alles aus PRO Monat</strong></li>
+<li><span class="yes">✓</span> <strong>1500+ Karten</strong></li>
+<li><span class="yes">✓</span> <strong>Keine Werbung!</strong></li>
+<li><span class="yes">✓</span> <strong>Bis zu 20 Spieler</strong></li>
+<li><span class="yes">✓</span> Neue Packs gratis</li>
+<li><span class="yes">✓</span> Priority Support</li>
+</ul>
+<a href="app.html" class="btn btn-secondary" style="width:100%;border-color:var(--green)">Bestes Angebot</a>
+</div>
+</div>
+</div>
+</section>
+
+<section class="install-section" id="install">
+<div class="container">
+<div class="install-card reveal">
+<div class="install-header">
+<span class="install-emoji">📲</span>
+<h2>App speichern – <span class="glow-text">ohne App Store!</span></h2>
+<p>SAUFKOMPASS in 10 Sekunden auf deinem Homescreen – keine Installation, kein Speicherplatz!</p>
+</div>
+<div class="install-platforms">
+<div class="platform-card">
+<div class="platform-icon">🍎</div>
+<h3>iPhone / iPad</h3>
+<div class="platform-steps">
+<div class="pstep"><span class="pnum">1</span><span>Öffne <strong>saufkompass.de</strong> in Safari</span></div>
+<div class="pstep"><span class="pnum">2</span><span>Tippe auf <strong>Teilen</strong> <span class="key">⬆️</span></span></div>
+<div class="pstep"><span class="pnum">3</span><span>Wähle <strong>"Zum Home-Bildschirm"</strong></span></div>
+<div class="pstep"><span class="pnum">4</span><span>Fertig! 🎉</span></div>
+</div>
+</div>
+<div class="platform-card">
+<div class="platform-icon">🤖</div>
+<h3>Android</h3>
+<div class="platform-steps">
+<div class="pstep"><span class="pnum">1</span><span>Öffne <strong>saufkompass.de</strong> in Chrome</span></div>
+<div class="pstep"><span class="pnum">2</span><span>Tippe auf <strong>⋮ Menü</strong> (oben rechts)</span></div>
+<div class="pstep"><span class="pnum">3</span><span>Wähle <strong>"Zum Startbildschirm"</strong></span></div>
+<div class="pstep"><span class="pnum">4</span><span>Fertig! 🎉</span></div>
+</div>
+</div>
+</div>
+<div class="install-benefits">
+<div class="ibenefit"><span>⚡</span> Sofort startklar</div>
+<div class="ibenefit"><span>📴</span> Funktioniert offline</div>
+<div class="ibenefit"><span>💾</span> Kein Speicherplatz</div>
+<div class="ibenefit"><span>🔄</span> Immer aktuell</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="faq" id="faq">
+<div class="container">
+<div class="section-header reveal"><h2>Häufige Fragen</h2></div>
+<div class="faq-list">
+<div class="faq-item reveal">
+<div class="faq-q"><span>Ist SAUFKOMPASS wirklich kostenlos?</span><span class="faq-icon">+</span></div>
+<div class="faq-a"><div class="faq-inner">Ja! Die Basis-Version mit 200+ Karten ist komplett kostenlos. In der Free-Version siehst du gelegentlich Werbung. Mit PRO (ab 4,99€/Monat oder 47,99€/Jahr) bekommst du alle 1500+ Karten und <strong>keine Werbung</strong>!</div></div>
+</div>
+<div class="faq-item reveal">
+<div class="faq-q"><span>Muss ich die App installieren?</span><span class="faq-icon">+</span></div>
+<div class="faq-a"><div class="faq-inner">Nein! SAUFKOMPASS läuft direkt im Browser. Du kannst sie aber auch speichern:
+<div class="install-box">
+<h4>📲 So geht's:</h4>
+<div class="tabs"><div class="tab on" onclick="showTab('ios')">iPhone</div><div class="tab" onclick="showTab('android')">Android</div></div>
+<div id="ios" class="tab-content on">
+<div class="step"><span class="step-n">1</span>Öffne saufkompass.de in <strong>Safari</strong></div>
+<div class="step"><span class="step-n">2</span>Tippe auf <strong>Teilen</strong> (Quadrat mit Pfeil)</div>
+<div class="step"><span class="step-n">3</span>Wähle <strong>"Zum Home-Bildschirm"</strong></div>
+<div class="step"><span class="step-n">4</span>Tippe <strong>"Hinzufügen"</strong> – Fertig! 🎉</div>
+</div>
+<div id="android" class="tab-content">
+<div class="step"><span class="step-n">1</span>Öffne saufkompass.de in <strong>Chrome</strong></div>
+<div class="step"><span class="step-n">2</span>Tippe auf <strong>⋮</strong> (drei Punkte oben)</div>
+<div class="step"><span class="step-n">3</span>Wähle <strong>"Zum Startbildschirm"</strong></div>
+<div class="step"><span class="step-n">4</span>Tippe <strong>"Hinzufügen"</strong> – Fertig! 🎉</div>
+</div>
+</div>
+</div></div>
+</div>
+<div class="faq-item reveal">
+<div class="faq-q"><span>Funktioniert die App offline?</span><span class="faq-icon">+</span></div>
+<div class="faq-a"><div class="faq-inner">Ja! Einmal geladen funktioniert SAUFKOMPASS komplett offline – perfekt für Partys ohne Internet.</div></div>
+</div>
+<div class="faq-item reveal">
+<div class="faq-q"><span>Für wie viele Spieler?</span><span class="faq-icon">+</span></div>
+<div class="faq-a"><div class="faq-inner">SAUFKOMPASS ist perfekt für <strong>2 bis 20 Spieler</strong>! Free: bis 6 Spieler. PRO: bis 20 Spieler – ideal für WG-Partys, JGA oder Festivals!</div></div>
+</div>
+<div class="faq-item reveal">
+<div class="faq-q"><span>Kann ich jederzeit kündigen?</span><span class="faq-icon">+</span></div>
+<div class="faq-a"><div class="faq-inner">Ja! Dein PRO-Abo ist jederzeit kündbar. Keine versteckten Gebühren.</div></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="cta">
+<div class="container">
+<div class="cta-inner reveal">
+<h2>Bereit für die <span class="glow-text">beste Party</span>?</h2>
+<p>Öffne SAUFKOMPASS und starte jetzt – kostenlos!</p>
+<a href="app.html" class="btn btn-primary" style="padding:18px 40px">🎮 Jetzt spielen</a>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="container">
+<div class="foot-grid">
+<div class="foot-brand">
+<a href="#" class="logo"><div class="logo-icon">🧭</div><span class="logo-text">SAUFKOMPASS</span></a>
+<p>Die #1 Trinkspiel-App Deutschlands. 50.000+ Spieler.</p>
+<div class="foot-social">
+<a href="https://instagram.com/saufkompass" target="_blank">📸</a>
+<a href="https://tiktok.com/@saufkompass" target="_blank">🎵</a>
+<a href="/cdn-cgi/l/email-protection#492226273d28223d093a283c2f22262439283a3a672d2c">📧</a>
+</div>
+</div>
+<div class="foot-col"><h4>Spielen</h4><a href="app.html">Web-App</a><a href="app.html">Spielmodi</a><a href="app.html">PRO werden</a></div>
+<div class="foot-col"><h4>Support</h4><a href="#faq">FAQ</a><a href="/cdn-cgi/l/email-protection#c8a3a7a6bca9a3bc88bba9bdaea3a7a5b8a9bbbbe6acad">Kontakt</a></div>
+<div class="foot-col"><h4>Rechtliches</h4><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></div>
+</div>
+<div class="foot-bottom">© 2026 SAUFKOMPASS. Ab 16 Jahren. Trinke verantwortungsvoll! 🍺</div>
+</div>
+</footer>
+
+<div class="age-box" id="ageBox">
+<span>⚠️</span>
+<p><strong>Ab 16!</strong> Nur für Erwachsene.</p>
+<button class="age-x" onclick="closeAge()">×</button>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>50));
+document.querySelectorAll('.faq-q').forEach(q=>q.addEventListener('click',()=>q.parentElement.classList.toggle('open')));
+const revs=document.querySelectorAll('.reveal');
+const check=()=>revs.forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight*.9)el.classList.add('show')});
+window.addEventListener('scroll',check);check();
+function closeAge(){document.getElementById('ageBox').style.display='none';localStorage.setItem('ageClosed','1')}
+if(localStorage.getItem('ageClosed'))document.getElementById('ageBox').style.display='none';
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',function(e){e.preventDefault();document.querySelector(this.getAttribute('href'))?.scrollIntoView({behavior:'smooth'})}));
+function showTab(t){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.tab-content').forEach(x=>x.classList.remove('on'));event.target.classList.add('on');document.getElementById(t).classList.add('on')}
+
+// Live counter
+const liveCount=document.getElementById('liveCount');
+let count=847;
+setInterval(()=>{
+count=Math.max(500,Math.min(1500,count+Math.floor(Math.random()*21)-10));
+liveCount.textContent=count.toLocaleString('de-DE');
+},3000);
+
+// Card Demo Animation
+const cards=[
+{cat:'🎯 WAHRHEIT',q:'Was war der peinlichste Moment deines Lebens?',p:'🍺 Sonst: 2 Schlücke',col:'#00f5ff'},
+{cat:'💪 CHALLENGE',q:'Mach deinen besten Moonwalk!',p:'🍺 Sonst: 3 Schlücke',col:'#ff6b35'},
+{cat:'🗳️ VOTING',q:'Wer erzählt die wildesten Stories?',p:'🍺 Verlierer trinkt',col:'#bf5fff'},
+{cat:'🔥 SPICY',q:'Beschreibe dein letztes Date mit 3 Emojis!',p:'🍺 Oder: Ex trinken',col:'#ff2d95'},
+{cat:'😂 REGEL',q:'Jeder Satz muss mit "Alter!" enden',p:'🍺 Verstoß: 1 Schluck',col:'#ffd700'},
+{cat:'🎲 MINIGAME',q:'Würfel-Duell! Niedrigere Zahl trinkt.',p:'🎲 Tippe zum Würfeln',col:'#00ff88'},
+{cat:'🤔 ICH HAB NOCH NIE',q:'...einen Fremden geküsst',p:'🍺 Wer schon: trinkt!',col:'#00f5ff'},
+{cat:'👑 KINGS CUP',q:'DAME - Du bist Fragemeister!',p:'👑 Regel aktiv',col:'#ffd700'},
+];
+let idx=0;
+const catEl=document.getElementById('catDisplay');
+const countEl=document.getElementById('countDisplay');
+const cardEl=document.getElementById('card1');
+const qEl=document.getElementById('q1');
+const pEl=cardEl.querySelector('.dsc-p');
+
+function nextCard(){
+cardEl.classList.add('swipe-out');
+setTimeout(()=>{
+idx=(idx+1)%cards.length;
+const c=cards[idx];
+catEl.textContent=c.cat;
+catEl.style.color=c.col;
+qEl.textContent=c.q;
+pEl.textContent=c.p;
+countEl.textContent=idx+1;
+cardEl.classList.remove('swipe-out');
+cardEl.classList.add('swipe-in');
+setTimeout(()=>cardEl.classList.remove('swipe-in'),400);
+},500);
+}
+setInterval(nextCard,3500);
+</script>
+</body>
+</html>
